@@ -1,0 +1,67 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+
+local Window = Library.CreateLib("Sword Factory X", "RJTheme6")
+
+local Tab = Window:NewTab("Mobs")
+
+local Section = Tab:NewSection("Souls Farm")
+
+Section:NewToggle("Farm Mobs", "Здесь можно нафармить души", function(state)
+    if state then
+        farm = 1
+        while wait() do
+            if farm == 1 then
+                for i,v in pairs(game:GetService("Workspace").Mobs:GetDescendants()) do
+                    if v.Name == 'HumanoidRootPart' then
+                        game:GetService("Workspace").Egorpisch.HumanoidRootPart.CFrame = v.CFrame
+                        wait(0.1)
+                    end
+                end
+            end
+        end
+    else
+        farm = 0
+    end
+end)
+
+Section:NewToggle("Auto Attack", "Здесь автоудар", function(state)
+    if state then
+        attack = 1
+        while game:GetService("RunService").RenderStepped:wait() do
+            if attack == 1 then
+                local args = {
+                    [1] = "Attack",
+                    [2] = false
+                }
+
+                game:GetService("Players").LocalPlayer.Character.Sword.SwordScriptNew.Attack:FireServer(unpack(args))
+                end
+        end
+    else
+        attack = 0
+    end
+end)
+
+local Tab = Window:NewTab("Soul Tank")
+
+local Section = Tab:NewSection("Soul Tank")
+
+Section:NewToggle("Auto Deposit Souls", "Здесь авто конвентер душ", function(state)
+    if state then
+        dep = 1
+        while wait(5) do
+            if dep == 1 then
+                local args = {
+                    [1] = 0,
+                    [2] = "SoulTankService",
+                    [3] = "AddSouls",
+                    [4] = {}
+                }
+
+                game:GetService("ReplicatedStorage").Framework.RemoteFunction:InvokeServer(unpack(args))
+                end
+        end
+    else
+        dep = 0
+    end
+end)
