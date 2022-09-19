@@ -13,7 +13,7 @@ Section:NewToggle("Farm Mobs", "Здесь можно нафармить душ�
             if farm == 1 then
                 for i,v in pairs(game:GetService("Workspace").Mobs:GetDescendants()) do
                     if v.Name == 'HumanoidRootPart' then
-                        game:GetService("Workspace").Egorpisch.HumanoidRootPart.CFrame = v.CFrame
+                        game:GetService("Players").LocalPlayer.HumanoidRootPart.CFrame = v.CFrame
                         wait(0.1)
                     end
                 end
